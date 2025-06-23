@@ -1,0 +1,1 @@
+cmd_/home/debian/mydriver/mydriver.ko := ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/debian/mydriver/mydriver.ko /home/debian/mydriver/mydriver.o /home/debian/mydriver/mydriver.mod.o ;  true

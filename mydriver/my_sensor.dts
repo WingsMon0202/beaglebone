@@ -1,0 +1,26 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone-black";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            my_sensor: my_sensor {
+                compatible = "you,my-mysensor";
+                threshold = <55>;
+                status = "okay";
+            };
+my_gpio_driver: my_gpio_driver {
+    compatible = "my,gpio-test";
+    status = "okay";
+    led-gpio = <&gpio1 12 0>;     // GPIO44 (P8_12)
+    button-gpio = <&gpio0 26 1>;  // GPIO26 (P8_14), active low
+};
+
+
+        };
+    };
+};
+

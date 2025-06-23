@@ -1,0 +1,2 @@
+kernel//home/debian/mydriver/mydriver.ko
+kernel//home/debian/mydriver/mychardev.ko

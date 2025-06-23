@@ -1,0 +1,1 @@
+cmd_/home/debian/mydriver/mychardev.ko := ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/debian/mydriver/mychardev.ko /home/debian/mydriver/mychardev.o /home/debian/mydriver/mychardev.mod.o ;  true

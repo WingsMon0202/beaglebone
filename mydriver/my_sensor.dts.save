@@ -1,0 +1,21 @@
+dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "ti,beaglebone-black";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            asm1: asm1 {
+                compatible = "you,my-sensor";
+                threshold = <55>;
+                status = "okay";
+            };
+        };
+    };
+};
+
+
+
+

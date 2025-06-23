@@ -1,0 +1,50 @@
+clude <linux/module.h>
+#include <linux/init.h>
+#include <linux/platform_device.h>
+#include <linux/of.h>
+#include <linux/of_device.h>
+
+static int my_probe(struct platform_device *pdev)
+{
+    struct device *dev = &pdev->dev;
+    struct device_node *np = dev->of_node;
+    u32 threshold;
+
+    if (of_property_read_u32(np, "threshold", &threshold)) {
+        dev_err(dev, "Cannot read threshold property\n");
+        return -EINVAL;
+    }
+
+    dev_info(dev, "my-sensor threshold: %u\n", threshold);
+    return 0;
+}
+
+static int my_remove(struct platform_device *pdev)
+{
+    dev_info(&pdev->dev, "my-sensor removed\n");
+
+
+    return 0;
+}
+
+static const struct of_device_id my_of_ids[] = {
+    { .compatible = "you,my-sensor" },
+    { }
+};
+MODULE_DEVICE_TABLE(of, my_of_ids);
+
+static struct platform_driver my_platform_driver = {
+    .driver = {
+        .name = "my_sensor_driver",
+        .of_match_table = my_of_ids,
+    },
+    .probe = my_probe,
+    .remove = my_remove,
+};
+
+module_platform_driver(my_platform_driver);
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Your Name");
+MODULE_DESCRIPTION("Platform driver đọc threshold từ device tree");
+
