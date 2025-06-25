@@ -1,0 +1,1 @@
+savedcmd_/home/wings/beaglebone/gpio_button_driver.ko := ld -r -m elf_x86_64 -z noexecstack --build-id=sha1  -T scripts/module.lds -o /home/wings/beaglebone/gpio_button_driver.ko /home/wings/beaglebone/gpio_button_driver.o /home/wings/beaglebone/gpio_button_driver.mod.o

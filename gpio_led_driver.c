@@ -1,51 +1,49 @@
 #include <linux/module.h>
-#include <linux/init.h>
+#include <linux/platform_device.h>
 #include <linux/of.h>
 #include <linux/of_gpio.h>
 #include <linux/gpio.h>
-#include <linux/platform_device.h>
+#include <linux/kernel.h>
 
-int gpio_led;
-                 
-EXPORT_SYMBOL(gpio_led);      
+static int gpio_led;
+static bool led_state = false;
 
+void gpio_led_toggle(void)
+{
+    led_state = !led_state;
+    gpio_set_value(gpio_led, led_state);
+    pr_info("gpio-led: LED toggled to %s\n", led_state ? "ON" : "OFF");
+}
+EXPORT_SYMBOL(gpio_led_toggle);
 
-static const char *led_label;
 static int led_probe(struct platform_device *pdev)
 {
     struct device *dev = &pdev->dev;
+    const char *label;
     int ret;
-
-    dev_info(dev, "led driver: probe started\n");
 
     gpio_led = of_get_named_gpio(dev->of_node, "gpios", 0);
     if (!gpio_is_valid(gpio_led)) {
-        dev_err(dev, "led driver: invalid GPIO\n");
+        dev_err(dev, "Invalid GPIO for LED\n");
         return -EINVAL;
     }
-    dev_info(dev, "led driver: acquired GPIO %d\n", gpio_led);
 
-    if (of_property_read_string(dev->of_node, "label", &led_label) == 0)
-        dev_info(dev, "led driver: label = %s\n", led_label);
-    else {
-        led_label = "gpio-led";
-        dev_info(dev, "led driver: no label found, using default\n");
-    }
+    if (of_property_read_string(dev->of_node, "label", &label))
+        label = "gpio-led";
 
-    ret = devm_gpio_request_one(dev, gpio_led, GPIOF_OUT_INIT_HIGH, led_label);
+    ret = devm_gpio_request_one(dev, gpio_led, GPIOF_OUT_INIT_LOW, label);
     if (ret) {
-        dev_err(dev, "led driver: failed to request GPIO %d\n", gpio_led);
+        dev_err(dev, "Failed to request LED GPIO\n");
         return ret;
     }
 
-    dev_info(dev, "led driver: LED turned ON at GPIO %d\n", gpio_led);
+    pr_info("gpio-led: initialized on GPIO %d\n", gpio_led);
     return 0;
 }
 
 static int led_remove(struct platform_device *pdev)
 {
-    dev_info(&pdev->dev, "led driver: module removed, turning OFF LED\n");
-    gpio_set_value(gpio_led, 0);
+    pr_info("gpio-led: removed\n");
     return 0;
 }
 
@@ -63,10 +61,8 @@ static struct platform_driver led_driver = {
         .of_match_table = led_of_match,
     },
 };
-
 module_platform_driver(led_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Wings Mon");
-MODULE_DESCRIPTION("Simple GPIO LED driver with English debug logs");
-
+MODULE_DESCRIPTION("LED driver using GPIO from device tree");

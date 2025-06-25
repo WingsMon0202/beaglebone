@@ -1,15 +1,24 @@
-#include <linux/build-salt.h>
 #include <linux/module.h>
+#define INCLUDE_VERMAGIC
+#include <linux/build-salt.h>
+#include <linux/elfnote-lto.h>
+#include <linux/export-internal.h>
 #include <linux/vermagic.h>
 #include <linux/compiler.h>
 
+#ifdef CONFIG_UNWINDER_ORC
+#include <asm/orc_header.h>
+ORC_HEADER;
+#endif
+
 BUILD_SALT;
+BUILD_LTO_INFO;
 
 MODULE_INFO(vermagic, VERMAGIC_STRING);
 MODULE_INFO(name, KBUILD_MODNAME);
 
 __visible struct module __this_module
-__attribute__((section(".gnu.linkonce.this_module"))) = {
+__section(".gnu.linkonce.this_module") = {
 	.name = KBUILD_MODNAME,
 	.init = init_module,
 #ifdef CONFIG_MODULE_UNLOAD
@@ -22,32 +31,22 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 MODULE_INFO(retpoline, "Y");
 #endif
 
+
+
 static const struct modversion_info ____versions[]
-__used
-__attribute__((section("__versions"))) = {
-	{ 0x516e49f9, "module_layout" },
-	{ 0xf55bc851, "platform_driver_unregister" },
-	{ 0xe89992a5, "__platform_driver_register" },
-	{ 0xdb7305a1, "__stack_chk_fail" },
-	{ 0xc4021e53, "_dev_err" },
-	{ 0x5d5ca740, "devm_request_threaded_irq" },
-	{ 0xaf09f062, "gpiod_to_irq" },
-	{ 0x44bc07ec, "devm_gpio_request_one" },
-	{ 0x1bf2b029, "of_property_read_string" },
-	{ 0x4b2b94d9, "of_get_named_gpio_flags" },
-	{ 0x8f678b07, "__stack_chk_guard" },
-	{ 0x7c32d0f0, "printk" },
-	{ 0xddc1fca4, "gpiod_set_raw_value" },
-	{ 0x395c5ae9, "gpio_to_desc" },
-	{ 0x2e5810c6, "__aeabi_unwind_cpp_pr1" },
-	{ 0x7767f9fb, "_dev_info" },
-	{ 0xb1ad28e0, "__gnu_mcount_nc" },
+__used __section("__versions") = {
+	{ 0x122c3a7e, "_printk" },
+	{ 0xf1be6b0e, "_dev_err" },
+	{ 0x2cd5d0e1, "platform_driver_unregister" },
+	{ 0xbdfb6dbb, "__fentry__" },
+	{ 0x9e07cb93, "__platform_driver_register" },
+	{ 0x5b8239ca, "__x86_return_thunk" },
+	{ 0xb2b23fc2, "module_layout" },
 };
 
-static const char __module_depends[]
-__used
-__attribute__((section(".modinfo"))) =
-"depends=";
+MODULE_INFO(depends, "");
 
 MODULE_ALIAS("of:N*T*Cwings,gpio-button");
 MODULE_ALIAS("of:N*T*Cwings,gpio-buttonC*");
+
+MODULE_INFO(srcversion, "24D3A4DA98618D934975AB3");
