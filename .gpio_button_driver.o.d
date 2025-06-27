@@ -1,4 +1,4 @@
-gpio_led_driver.o: /home/wings/beaglebone/gpio_led_driver.c \
+gpio_button_driver.o: /home/wings/beaglebone/gpio_button_driver.c \
  include/linux/kconfig.h include/generated/autoconf.h \
  include/linux/compiler_types.h include/linux/compiler_attributes.h \
  include/linux/compiler-gcc.h include/linux/module.h include/linux/list.h \
@@ -135,7 +135,10 @@ gpio_led_driver.o: /home/wings/beaglebone/gpio_led_driver.c \
  include/asm-generic/error-injection.h include/linux/tracepoint-defs.h \
  include/linux/static_key.h include/linux/static_call_types.h \
  arch/arm/include/asm/module.h include/asm-generic/module.h \
- include/linux/platform_device.h include/linux/device.h \
+ include/linux/of.h include/linux/mod_devicetable.h include/linux/uuid.h \
+ include/uapi/linux/uuid.h include/linux/property.h \
+ include/linux/fwnode.h include/linux/of_gpio.h \
+ include/linux/gpio/driver.h include/linux/device.h \
  include/linux/dev_printk.h include/linux/ratelimit.h \
  include/linux/sched.h include/uapi/linux/sched.h include/linux/pid.h \
  include/linux/rculist.h include/linux/sem.h include/uapi/linux/sem.h \
@@ -172,11 +175,7 @@ gpio_led_driver.o: /home/wings/beaglebone/gpio_led_driver.c \
  include/linux/overflow.h include/linux/device/bus.h \
  include/linux/device/class.h include/linux/device/driver.h \
  arch/arm/include/asm/device.h include/linux/pm_wakeup.h \
- include/linux/of.h include/linux/mod_devicetable.h include/linux/uuid.h \
- include/uapi/linux/uuid.h include/linux/property.h \
- include/linux/fwnode.h include/linux/of_gpio.h \
- include/linux/gpio/driver.h include/linux/irq.h \
- include/linux/irqhandler.h include/linux/irqreturn.h \
+ include/linux/irq.h include/linux/irqhandler.h include/linux/irqreturn.h \
  include/linux/irqnr.h include/uapi/linux/irqnr.h include/linux/io.h \
  arch/arm/include/asm/io.h include/asm-generic/pci_iomap.h \
  include/asm-generic/io.h include/linux/logic_pio.h \
@@ -220,4 +219,9 @@ gpio_led_driver.o: /home/wings/beaglebone/gpio_led_driver.c \
  include/linux/pinctrl/consumer.h include/linux/pinctrl/pinconf-generic.h \
  include/linux/pinctrl/machine.h include/linux/gpio.h \
  arch/arm/include/asm/gpio.h include/asm-generic/gpio.h \
- include/linux/gpio/consumer.h
+ include/linux/gpio/consumer.h include/linux/interrupt.h \
+ include/linux/hardirq.h include/linux/context_tracking_state.h \
+ include/linux/ftrace_irq.h include/linux/vtime.h \
+ arch/arm/include/asm/hardirq.h include/linux/irq_cpustat.h \
+ arch/arm/include/asm/sections.h include/asm-generic/sections.h \
+ include/linux/platform_device.h

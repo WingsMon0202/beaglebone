@@ -1,0 +1,1 @@
+cmd_/home/wings/beaglebone/ioctl.ko := /home/wings/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-ld -r -EL --build-id=sha1  -T scripts/module.lds -o /home/wings/beaglebone/ioctl.ko /home/wings/beaglebone/ioctl.o /home/wings/beaglebone/ioctl.mod.o;  true

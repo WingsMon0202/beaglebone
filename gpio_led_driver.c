@@ -8,6 +8,13 @@
 static int gpio_led;
 static bool led_state = false;
 
+int get_led_status(void)
+{
+    return gpio_get_value(gpio_led);
+}
+EXPORT_SYMBOL(get_led_status);
+
+
 void gpio_led_toggle(void)
 {
     led_state = !led_state;
@@ -38,6 +45,9 @@ static int led_probe(struct platform_device *pdev)
     }
 
     pr_info("gpio-led: initialized on GPIO %d\n", gpio_led);
+
+    gpio_set_value(gpio_led,1);
+
     return 0;
 }
 

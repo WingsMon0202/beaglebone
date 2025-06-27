@@ -1,8 +1,8 @@
-cmd_/home/wings/beaglebone/gpio_led_driver.o := /home/wings/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-gcc -Wp,-MMD,/home/wings/beaglebone/.gpio_led_driver.o.d -nostdinc -isystem /home/wings/buildroot/output/host/lib/gcc/arm-buildroot-linux-gnueabihf/11.3.0/include -I./arch/arm/include -I./arch/arm/include/generated  -I./include -I./arch/arm/include/uapi -I./arch/arm/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -mlittle-endian -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -fno-ipa-sra -mabi=aapcs-linux -mfpu=vfp -funwind-tables -marm -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=6 -march=armv6k -mtune=arm1136j-s -msoft-float -Uarm -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 -fno-allow-store-data-races -Wframe-larger-than=1024 -fstack-protector-strong -Wno-unused-but-set-variable -Wimplicit-fallthrough -Wno-unused-const-variable -fomit-frame-pointer -gsplit-dwarf -gdwarf-4 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-zero-length-bounds -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned  -DMODULE  -DKBUILD_BASENAME='"gpio_led_driver"' -DKBUILD_MODNAME='"gpio_led_driver"' -c -o /home/wings/beaglebone/gpio_led_driver.o /home/wings/beaglebone/gpio_led_driver.c
+cmd_/home/wings/beaglebone/ioctl.o := /home/wings/buildroot/output/host/bin/arm-buildroot-linux-gnueabihf-gcc -Wp,-MMD,/home/wings/beaglebone/.ioctl.o.d -nostdinc -isystem /home/wings/buildroot/output/host/lib/gcc/arm-buildroot-linux-gnueabihf/11.3.0/include -I./arch/arm/include -I./arch/arm/include/generated  -I./include -I./arch/arm/include/uapi -I./arch/arm/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -mlittle-endian -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 -fno-dwarf2-cfi-asm -fno-ipa-sra -mabi=aapcs-linux -mfpu=vfp -funwind-tables -marm -Wa,-mno-warn-deprecated -D__LINUX_ARM_ARCH__=6 -march=armv6k -mtune=arm1136j-s -msoft-float -Uarm -fno-delete-null-pointer-checks -Wno-frame-address -Wno-format-truncation -Wno-format-overflow -Wno-address-of-packed-member -O2 -fno-allow-store-data-races -Wframe-larger-than=1024 -fstack-protector-strong -Wno-unused-but-set-variable -Wimplicit-fallthrough -Wno-unused-const-variable -fomit-frame-pointer -gsplit-dwarf -gdwarf-4 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-stringop-truncation -Wno-zero-length-bounds -Wno-array-bounds -Wno-stringop-overflow -Wno-restrict -Wno-maybe-uninitialized -fno-strict-overflow -fno-stack-check -fconserve-stack -Werror=date-time -Werror=incompatible-pointer-types -Werror=designated-init -Wno-packed-not-aligned  -DMODULE  -DKBUILD_BASENAME='"ioctl"' -DKBUILD_MODNAME='"ioctl"' -c -o /home/wings/beaglebone/ioctl.o /home/wings/beaglebone/ioctl.c
 
-source_/home/wings/beaglebone/gpio_led_driver.o := /home/wings/beaglebone/gpio_led_driver.c
+source_/home/wings/beaglebone/ioctl.o := /home/wings/beaglebone/ioctl.c
 
-deps_/home/wings/beaglebone/gpio_led_driver.o := \
+deps_/home/wings/beaglebone/ioctl.o := \
   include/linux/kconfig.h \
     $(wildcard include/config/cc/version/text.h) \
     $(wildcard include/config/cpu/big/endian.h) \
@@ -581,28 +581,73 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
     $(wildcard include/config/have/mod/arch/specific.h) \
     $(wildcard include/config/modules/use/elf/rel.h) \
     $(wildcard include/config/modules/use/elf/rela.h) \
-  include/linux/platform_device.h \
-    $(wildcard include/config/suspend.h) \
-    $(wildcard include/config/hibernate/callbacks.h) \
-    $(wildcard include/config/superh.h) \
-  include/linux/device.h \
-    $(wildcard include/config/debug/devres.h) \
-    $(wildcard include/config/energy/model.h) \
-    $(wildcard include/config/generic/msi/irq/domain.h) \
-    $(wildcard include/config/pinctrl.h) \
-    $(wildcard include/config/generic/msi/irq.h) \
-    $(wildcard include/config/dma/ops.h) \
-    $(wildcard include/config/dma/declare/coherent.h) \
-    $(wildcard include/config/dma/cma.h) \
-    $(wildcard include/config/arch/has/sync/dma/for/device.h) \
-    $(wildcard include/config/arch/has/sync/dma/for/cpu.h) \
-    $(wildcard include/config/arch/has/sync/dma/for/cpu/all.h) \
-    $(wildcard include/config/dma/ops/bypass.h) \
-    $(wildcard include/config/of.h) \
-    $(wildcard include/config/devtmpfs.h) \
-    $(wildcard include/config/sysfs/deprecated.h) \
-  include/linux/dev_printk.h \
-  include/linux/ratelimit.h \
+  include/linux/fs.h \
+    $(wildcard include/config/read/only/thp/for/fs.h) \
+    $(wildcard include/config/fs/posix/acl.h) \
+    $(wildcard include/config/security.h) \
+    $(wildcard include/config/cgroup/writeback.h) \
+    $(wildcard include/config/ima.h) \
+    $(wildcard include/config/file/locking.h) \
+    $(wildcard include/config/fsnotify.h) \
+    $(wildcard include/config/fs/encryption.h) \
+    $(wildcard include/config/fs/verity.h) \
+    $(wildcard include/config/epoll.h) \
+    $(wildcard include/config/unicode.h) \
+    $(wildcard include/config/compat.h) \
+    $(wildcard include/config/quota.h) \
+    $(wildcard include/config/fs/dax.h) \
+    $(wildcard include/config/mandatory/file/locking.h) \
+    $(wildcard include/config/block.h) \
+    $(wildcard include/config/migration.h) \
+  include/linux/wait_bit.h \
+  include/linux/kdev_t.h \
+  include/uapi/linux/kdev_t.h \
+  include/linux/dcache.h \
+  include/linux/rculist.h \
+    $(wildcard include/config/prove/rcu/list.h) \
+  include/linux/rculist_bl.h \
+  include/linux/list_bl.h \
+  include/linux/bit_spinlock.h \
+  include/linux/lockref.h \
+    $(wildcard include/config/arch/use/cmpxchg/lockref.h) \
+  include/linux/stringhash.h \
+    $(wildcard include/config/dcache/word/access.h) \
+  include/linux/hash.h \
+    $(wildcard include/config/have/arch/hash.h) \
+  include/linux/path.h \
+  include/linux/list_lru.h \
+    $(wildcard include/config/memcg/kmem.h) \
+  include/linux/shrinker.h \
+  include/linux/pid.h \
+  include/linux/capability.h \
+  include/uapi/linux/capability.h \
+  include/linux/semaphore.h \
+  include/linux/fcntl.h \
+    $(wildcard include/config/arch/32bit/off/t.h) \
+  include/uapi/linux/fcntl.h \
+  arch/arm/include/uapi/asm/fcntl.h \
+  include/uapi/asm-generic/fcntl.h \
+  include/uapi/linux/openat2.h \
+  include/linux/migrate_mode.h \
+  include/linux/percpu-rwsem.h \
+  include/linux/rcuwait.h \
+  include/linux/sched/signal.h \
+    $(wildcard include/config/sched/autogroup.h) \
+    $(wildcard include/config/bsd/process/acct.h) \
+    $(wildcard include/config/taskstats.h) \
+    $(wildcard include/config/audit.h) \
+    $(wildcard include/config/stack/growsup.h) \
+  include/linux/signal.h \
+    $(wildcard include/config/proc/fs.h) \
+  include/linux/signal_types.h \
+    $(wildcard include/config/old/sigaction.h) \
+  include/uapi/linux/signal.h \
+  arch/arm/include/asm/signal.h \
+  arch/arm/include/uapi/asm/signal.h \
+  include/uapi/asm-generic/signal-defs.h \
+  arch/arm/include/uapi/asm/sigcontext.h \
+  arch/arm/include/generated/uapi/asm/siginfo.h \
+  include/uapi/asm-generic/siginfo.h \
   include/linux/sched.h \
     $(wildcard include/config/virt/cpu/accounting/native.h) \
     $(wildcard include/config/sched/info.h) \
@@ -628,16 +673,13 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
     $(wildcard include/config/sysvipc.h) \
     $(wildcard include/config/detect/hung/task.h) \
     $(wildcard include/config/io/uring.h) \
-    $(wildcard include/config/audit.h) \
     $(wildcard include/config/auditsyscall.h) \
     $(wildcard include/config/ubsan.h) \
     $(wildcard include/config/ubsan/trap.h) \
-    $(wildcard include/config/block.h) \
     $(wildcard include/config/task/xacct.h) \
     $(wildcard include/config/cpusets.h) \
     $(wildcard include/config/x86/cpu/resctrl.h) \
     $(wildcard include/config/futex.h) \
-    $(wildcard include/config/compat.h) \
     $(wildcard include/config/perf/events.h) \
     $(wildcard include/config/rseq.h) \
     $(wildcard include/config/task/delay/acct.h) \
@@ -648,15 +690,11 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
     $(wildcard include/config/kcov.h) \
     $(wildcard include/config/bcache.h) \
     $(wildcard include/config/vmap/stack.h) \
-    $(wildcard include/config/security.h) \
     $(wildcard include/config/gcc/plugin/stackleak.h) \
     $(wildcard include/config/x86/mce.h) \
     $(wildcard include/config/arch/task/struct/on/stack.h) \
     $(wildcard include/config/debug/rseq.h) \
   include/uapi/linux/sched.h \
-  include/linux/pid.h \
-  include/linux/rculist.h \
-    $(wildcard include/config/prove/rcu/list.h) \
   include/linux/sem.h \
   include/uapi/linux/sem.h \
   include/linux/ipc.h \
@@ -699,15 +737,6 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
   include/linux/latencytop.h \
   include/linux/sched/prio.h \
   include/linux/sched/types.h \
-  include/linux/signal_types.h \
-    $(wildcard include/config/old/sigaction.h) \
-  include/uapi/linux/signal.h \
-  arch/arm/include/asm/signal.h \
-  arch/arm/include/uapi/asm/signal.h \
-  include/uapi/asm-generic/signal-defs.h \
-  arch/arm/include/uapi/asm/sigcontext.h \
-  arch/arm/include/generated/uapi/asm/siginfo.h \
-  include/uapi/asm-generic/siginfo.h \
   include/linux/task_io_accounting.h \
     $(wildcard include/config/task/io/accounting.h) \
   include/linux/posix-timers.h \
@@ -716,161 +745,6 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
   include/linux/task_work.h \
   include/uapi/linux/rseq.h \
   include/linux/kcsan.h \
-  include/linux/energy_model.h \
-  include/linux/sched/cpufreq.h \
-    $(wildcard include/config/cpu/freq.h) \
-  include/linux/sched/topology.h \
-    $(wildcard include/config/sched/debug.h) \
-    $(wildcard include/config/sched/mc.h) \
-  include/linux/sched/idle.h \
-  include/linux/sched/sd_flags.h \
-  include/linux/ioport.h \
-    $(wildcard include/config/io/strict/devmem.h) \
-  include/linux/klist.h \
-  include/linux/pm.h \
-    $(wildcard include/config/vt/console/sleep.h) \
-    $(wildcard include/config/pm.h) \
-    $(wildcard include/config/pm/clk.h) \
-    $(wildcard include/config/pm/generic/domains.h) \
-  include/linux/overflow.h \
-  include/linux/device/bus.h \
-    $(wildcard include/config/acpi.h) \
-  include/linux/device/class.h \
-  include/linux/device/driver.h \
-  arch/arm/include/asm/device.h \
-    $(wildcard include/config/dmabounce.h) \
-    $(wildcard include/config/arm/dma/use/iommu.h) \
-    $(wildcard include/config/arch/omap.h) \
-  include/linux/pm_wakeup.h \
-  include/linux/of.h \
-    $(wildcard include/config/of/dynamic.h) \
-    $(wildcard include/config/sparc.h) \
-    $(wildcard include/config/of/promtree.h) \
-    $(wildcard include/config/of/kobj.h) \
-    $(wildcard include/config/of/numa.h) \
-    $(wildcard include/config/of/overlay.h) \
-  include/linux/mod_devicetable.h \
-  include/linux/uuid.h \
-  include/uapi/linux/uuid.h \
-  include/linux/property.h \
-  include/linux/fwnode.h \
-  include/linux/of_gpio.h \
-    $(wildcard include/config/of/gpio.h) \
-  include/linux/gpio/driver.h \
-    $(wildcard include/config/irq/domain/hierarchy.h) \
-    $(wildcard include/config/gpio/generic.h) \
-    $(wildcard include/config/gpiolib/irqchip.h) \
-    $(wildcard include/config/gpiolib.h) \
-  include/linux/irq.h \
-    $(wildcard include/config/generic/irq/effective/aff/mask.h) \
-    $(wildcard include/config/generic/irq/ipi.h) \
-    $(wildcard include/config/generic/irq/migration.h) \
-    $(wildcard include/config/generic/pending/irq.h) \
-    $(wildcard include/config/hardirqs/sw/resend.h) \
-    $(wildcard include/config/generic/irq/legacy/alloc/hwirq.h) \
-    $(wildcard include/config/generic/irq/legacy.h) \
-    $(wildcard include/config/generic/irq/multi/handler.h) \
-  include/linux/irqhandler.h \
-  include/linux/irqreturn.h \
-  include/linux/irqnr.h \
-  include/uapi/linux/irqnr.h \
-  include/linux/io.h \
-    $(wildcard include/config/have/arch/huge/vmap.h) \
-    $(wildcard include/config/has/ioport/map.h) \
-    $(wildcard include/config/pci.h) \
-  arch/arm/include/asm/io.h \
-    $(wildcard include/config/need/mach/io/h.h) \
-    $(wildcard include/config/pcmcia/soc/common.h) \
-    $(wildcard include/config/isa.h) \
-    $(wildcard include/config/pccard.h) \
-  include/asm-generic/pci_iomap.h \
-    $(wildcard include/config/no/generic/pci/ioport/map.h) \
-    $(wildcard include/config/generic/pci/iomap.h) \
-  include/asm-generic/io.h \
-    $(wildcard include/config/generic/iomap.h) \
-    $(wildcard include/config/generic/ioremap.h) \
-    $(wildcard include/config/virt/to/bus.h) \
-  include/linux/logic_pio.h \
-    $(wildcard include/config/indirect/pio.h) \
-  include/linux/vmalloc.h \
-    $(wildcard include/config/kasan/vmalloc.h) \
-  arch/arm/include/asm/vmalloc.h \
-  include/linux/slab.h \
-    $(wildcard include/config/debug/slab.h) \
-    $(wildcard include/config/failslab.h) \
-    $(wildcard include/config/memcg/kmem.h) \
-    $(wildcard include/config/have/hardened/usercopy/allocator.h) \
-    $(wildcard include/config/slab.h) \
-    $(wildcard include/config/slub.h) \
-    $(wildcard include/config/slob.h) \
-  include/linux/percpu-refcount.h \
-  include/linux/kasan.h \
-    $(wildcard include/config/kasan/generic.h) \
-    $(wildcard include/config/kasan/inline.h) \
-  arch/arm/include/asm/irq.h \
-    $(wildcard include/config/sparse/irq.h) \
-  arch/arm/include/generated/asm/irq_regs.h \
-  include/asm-generic/irq_regs.h \
-  include/linux/irqdesc.h \
-    $(wildcard include/config/proc/fs.h) \
-    $(wildcard include/config/generic/irq/debugfs.h) \
-    $(wildcard include/config/handle/domain/irq.h) \
-    $(wildcard include/config/irq/domain.h) \
-  arch/arm/include/asm/hw_irq.h \
-  include/linux/irqchip/chained_irq.h \
-  include/linux/irqdomain.h \
-  include/linux/pinctrl/pinctrl.h \
-    $(wildcard include/config/generic/pinconf.h) \
-  include/linux/seq_file.h \
-  include/linux/fs.h \
-    $(wildcard include/config/read/only/thp/for/fs.h) \
-    $(wildcard include/config/fs/posix/acl.h) \
-    $(wildcard include/config/cgroup/writeback.h) \
-    $(wildcard include/config/ima.h) \
-    $(wildcard include/config/file/locking.h) \
-    $(wildcard include/config/fsnotify.h) \
-    $(wildcard include/config/fs/encryption.h) \
-    $(wildcard include/config/fs/verity.h) \
-    $(wildcard include/config/epoll.h) \
-    $(wildcard include/config/unicode.h) \
-    $(wildcard include/config/quota.h) \
-    $(wildcard include/config/fs/dax.h) \
-    $(wildcard include/config/mandatory/file/locking.h) \
-    $(wildcard include/config/migration.h) \
-  include/linux/wait_bit.h \
-  include/linux/kdev_t.h \
-  include/uapi/linux/kdev_t.h \
-  include/linux/dcache.h \
-  include/linux/rculist_bl.h \
-  include/linux/list_bl.h \
-  include/linux/bit_spinlock.h \
-  include/linux/lockref.h \
-    $(wildcard include/config/arch/use/cmpxchg/lockref.h) \
-  include/linux/stringhash.h \
-    $(wildcard include/config/dcache/word/access.h) \
-  include/linux/hash.h \
-    $(wildcard include/config/have/arch/hash.h) \
-  include/linux/path.h \
-  include/linux/list_lru.h \
-  include/linux/shrinker.h \
-  include/linux/capability.h \
-  include/uapi/linux/capability.h \
-  include/linux/semaphore.h \
-  include/linux/fcntl.h \
-    $(wildcard include/config/arch/32bit/off/t.h) \
-  include/uapi/linux/fcntl.h \
-  arch/arm/include/uapi/asm/fcntl.h \
-  include/uapi/asm-generic/fcntl.h \
-  include/uapi/linux/openat2.h \
-  include/linux/migrate_mode.h \
-  include/linux/percpu-rwsem.h \
-  include/linux/rcuwait.h \
-  include/linux/sched/signal.h \
-    $(wildcard include/config/sched/autogroup.h) \
-    $(wildcard include/config/bsd/process/acct.h) \
-    $(wildcard include/config/taskstats.h) \
-    $(wildcard include/config/stack/growsup.h) \
-  include/linux/signal.h \
   include/linux/sched/jobctl.h \
   include/linux/sched/task.h \
     $(wildcard include/config/have/exit/thread.h) \
@@ -902,8 +776,11 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
     $(wildcard include/config/posix/mqueue.h) \
     $(wildcard include/config/bpf/syscall.h) \
     $(wildcard include/config/watch/queue.h) \
+  include/linux/ratelimit.h \
   include/linux/rcu_sync.h \
   include/linux/delayed_call.h \
+  include/linux/uuid.h \
+  include/uapi/linux/uuid.h \
   include/linux/errseq.h \
   include/linux/ioprio.h \
   include/linux/sched/rt.h \
@@ -924,19 +801,56 @@ deps_/home/wings/beaglebone/gpio_led_driver.o := \
   include/linux/projid.h \
   include/uapi/linux/quota.h \
   include/linux/nfs_fs_i.h \
-  include/linux/pinctrl/pinctrl-state.h \
-  include/linux/pinctrl/devinfo.h \
-  include/linux/pinctrl/consumer.h \
-  include/linux/pinctrl/pinconf-generic.h \
-  include/linux/pinctrl/machine.h \
-  include/linux/gpio.h \
-    $(wildcard include/config/arch/have/custom/gpio/h.h) \
-  arch/arm/include/asm/gpio.h \
-    $(wildcard include/config/arch/nr/gpio.h) \
-  include/asm-generic/gpio.h \
-  include/linux/gpio/consumer.h \
-    $(wildcard include/config/gpio/sysfs.h) \
+  include/linux/cdev.h \
+  include/linux/device.h \
+    $(wildcard include/config/debug/devres.h) \
+    $(wildcard include/config/energy/model.h) \
+    $(wildcard include/config/generic/msi/irq/domain.h) \
+    $(wildcard include/config/pinctrl.h) \
+    $(wildcard include/config/generic/msi/irq.h) \
+    $(wildcard include/config/dma/ops.h) \
+    $(wildcard include/config/dma/declare/coherent.h) \
+    $(wildcard include/config/dma/cma.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/device.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/cpu.h) \
+    $(wildcard include/config/arch/has/sync/dma/for/cpu/all.h) \
+    $(wildcard include/config/dma/ops/bypass.h) \
+    $(wildcard include/config/of.h) \
+    $(wildcard include/config/devtmpfs.h) \
+    $(wildcard include/config/sysfs/deprecated.h) \
+  include/linux/dev_printk.h \
+  include/linux/energy_model.h \
+  include/linux/sched/cpufreq.h \
+    $(wildcard include/config/cpu/freq.h) \
+  include/linux/sched/topology.h \
+    $(wildcard include/config/sched/debug.h) \
+    $(wildcard include/config/sched/mc.h) \
+  include/linux/sched/idle.h \
+  include/linux/sched/sd_flags.h \
+  include/linux/ioport.h \
+    $(wildcard include/config/io/strict/devmem.h) \
+  include/linux/klist.h \
+  include/linux/pm.h \
+    $(wildcard include/config/vt/console/sleep.h) \
+    $(wildcard include/config/pm.h) \
+    $(wildcard include/config/pm/clk.h) \
+    $(wildcard include/config/pm/generic/domains.h) \
+  include/linux/overflow.h \
+  include/linux/device/bus.h \
+    $(wildcard include/config/acpi.h) \
+  include/linux/device/class.h \
+  include/linux/device/driver.h \
+  arch/arm/include/asm/device.h \
+    $(wildcard include/config/dmabounce.h) \
+    $(wildcard include/config/arm/dma/use/iommu.h) \
+    $(wildcard include/config/arch/omap.h) \
+  include/linux/pm_wakeup.h \
+  include/linux/poll.h \
+  include/uapi/linux/poll.h \
+  arch/arm/include/generated/uapi/asm/poll.h \
+  include/uapi/asm-generic/poll.h \
+  include/uapi/linux/eventpoll.h \
 
-/home/wings/beaglebone/gpio_led_driver.o: $(deps_/home/wings/beaglebone/gpio_led_driver.o)
+/home/wings/beaglebone/ioctl.o: $(deps_/home/wings/beaglebone/ioctl.o)
 
-$(deps_/home/wings/beaglebone/gpio_led_driver.o):
+$(deps_/home/wings/beaglebone/ioctl.o):

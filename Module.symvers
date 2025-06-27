@@ -1,1 +1,3 @@
 0x14a36ccb	gpio_led_toggle	/home/wings/beaglebone/gpio_led_driver	EXPORT_SYMBOL	
+0x60b8ecca	get_led_status	/home/wings/beaglebone/gpio_led_driver	EXPORT_SYMBOL	
+0xb07c7216	get_button_status	/home/wings/beaglebone/gpio_button_driver	EXPORT_SYMBOL	

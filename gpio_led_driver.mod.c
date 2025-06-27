@@ -1,18 +1,10 @@
 #include <linux/module.h>
 #define INCLUDE_VERMAGIC
 #include <linux/build-salt.h>
-#include <linux/elfnote-lto.h>
-#include <linux/export-internal.h>
 #include <linux/vermagic.h>
 #include <linux/compiler.h>
 
-#ifdef CONFIG_UNWINDER_ORC
-#include <asm/orc_header.h>
-ORC_HEADER;
-#endif
-
 BUILD_SALT;
-BUILD_LTO_INFO;
 
 MODULE_INFO(vermagic, VERMAGIC_STRING);
 MODULE_INFO(name, KBUILD_MODNAME);
@@ -31,22 +23,22 @@ __section(".gnu.linkonce.this_module") = {
 MODULE_INFO(retpoline, "Y");
 #endif
 
-KSYMTAB_FUNC(gpio_led_toggle, "", "");
-
-SYMBOL_CRC(gpio_led_toggle, 0x14a36ccb, "");
-
 static const struct modversion_info ____versions[]
 __used __section("__versions") = {
-	{ 0x9e07cb93, "__platform_driver_register" },
-	{ 0xf1be6b0e, "_dev_err" },
-	{ 0x2cd5d0e1, "platform_driver_unregister" },
-	{ 0xe63556d0, "gpio_to_desc" },
-	{ 0x991bd129, "gpiod_set_raw_value" },
-	{ 0x54b1fac6, "__ubsan_handle_load_invalid_value" },
-	{ 0xbdfb6dbb, "__fentry__" },
-	{ 0x122c3a7e, "_printk" },
-	{ 0x5b8239ca, "__x86_return_thunk" },
-	{ 0xb2b23fc2, "module_layout" },
+	{ 0xe798b5ff, "module_layout" },
+	{ 0xc6244c08, "gpio_to_desc" },
+	{ 0x6beec397, "__platform_driver_register" },
+	{ 0xc5850110, "printk" },
+	{ 0x58017092, "of_property_read_string" },
+	{ 0xd44f7d43, "_dev_err" },
+	{ 0xa3f484c1, "devm_gpio_request_one" },
+	{ 0x86332725, "__stack_chk_fail" },
+	{ 0xb30d73ca, "of_get_named_gpio_flags" },
+	{ 0x740fb679, "gpiod_set_raw_value" },
+	{ 0xefd6cf06, "__aeabi_unwind_cpp_pr0" },
+	{ 0x8f678b07, "__stack_chk_guard" },
+	{ 0xb2480f25, "gpiod_get_raw_value" },
+	{ 0x49c33077, "platform_driver_unregister" },
 };
 
 MODULE_INFO(depends, "");
@@ -54,4 +46,4 @@ MODULE_INFO(depends, "");
 MODULE_ALIAS("of:N*T*Cwings,gpio-led");
 MODULE_ALIAS("of:N*T*Cwings,gpio-ledC*");
 
-MODULE_INFO(srcversion, "25A09E6E7D6272AE4AA0732");
+MODULE_INFO(srcversion, "2265C44885271001AC6350C");
