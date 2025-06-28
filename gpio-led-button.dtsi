@@ -2,14 +2,14 @@
     gpio_button_node: gpio-button@1 {
         compatible = "wings,gpio-button";
         status = "okay";
-        gpios = <&{/ocp/gpio@44e07000} 26 1>;  // GPIO0_26 (P8_14), active low
+        gpios = <&gpio0 26 1>;  // GPIO0_26 (P8_14), active low
         label = "user-button";
     };
 
     gpio_led_node: gpio-led@2 {
         compatible = "wings,gpio-led";
         status = "okay";
-        gpios = <&{/ocp/gpio@4804c000} 12 0>;  // GPIO1_12 (P8_12), active high
+        gpios = <&gpio1 12 0>;  // GPIO1_12 (P8_12), active high
         label = "status-led";
     };
 };
