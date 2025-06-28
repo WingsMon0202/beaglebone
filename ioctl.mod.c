@@ -50,7 +50,7 @@ __used __section("__versions") = {
 	{ 0xc5850110, "printk" },
 };
 
-MODULE_INFO(depends, "gpio_button_driver,gpio_led_driver");
+MODULE_INFO(depends, "");
 
 
 MODULE_INFO(srcversion, "215ACC56A74A173D6E9BE8F");

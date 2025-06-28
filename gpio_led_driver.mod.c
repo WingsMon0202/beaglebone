@@ -26,19 +26,17 @@ MODULE_INFO(retpoline, "Y");
 static const struct modversion_info ____versions[]
 __used __section("__versions") = {
 	{ 0xe798b5ff, "module_layout" },
-	{ 0xc6244c08, "gpio_to_desc" },
+	{ 0xd0595c84, "devm_gpiod_get" },
 	{ 0x6beec397, "__platform_driver_register" },
 	{ 0xc5850110, "printk" },
 	{ 0x58017092, "of_property_read_string" },
 	{ 0xd44f7d43, "_dev_err" },
-	{ 0xa3f484c1, "devm_gpio_request_one" },
 	{ 0x86332725, "__stack_chk_fail" },
-	{ 0xb30d73ca, "of_get_named_gpio_flags" },
-	{ 0x740fb679, "gpiod_set_raw_value" },
+	{ 0xb85ec714, "gpiod_get_value" },
 	{ 0xefd6cf06, "__aeabi_unwind_cpp_pr0" },
 	{ 0x8f678b07, "__stack_chk_guard" },
-	{ 0xb2480f25, "gpiod_get_raw_value" },
 	{ 0x49c33077, "platform_driver_unregister" },
+	{ 0x29e06a52, "gpiod_set_value" },
 };
 
 MODULE_INFO(depends, "");
@@ -46,4 +44,4 @@ MODULE_INFO(depends, "");
 MODULE_ALIAS("of:N*T*Cwings,gpio-led");
 MODULE_ALIAS("of:N*T*Cwings,gpio-ledC*");
 
-MODULE_INFO(srcversion, "2265C44885271001AC6350C");
+MODULE_INFO(srcversion, "E40113CCBCF39A1113660E1");

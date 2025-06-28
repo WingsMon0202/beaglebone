@@ -1,24 +1,22 @@
-#include <linux/module.h>
 #include <linux/platform_device.h>
 #include <linux/of.h>
-#include <linux/of_gpio.h>
-#include <linux/gpio.h>
+#include <linux/gpio/consumer.h>
+#include <linux/module.h>
 #include <linux/kernel.h>
 
-static int gpio_led;
+static struct gpio_desc *led_desc;
 static bool led_state = false;
 
 int get_led_status(void)
 {
-    return gpio_get_value(gpio_led);
+    return gpiod_get_value(led_desc);
 }
 EXPORT_SYMBOL(get_led_status);
-
 
 void gpio_led_toggle(void)
 {
     led_state = !led_state;
-    gpio_set_value(gpio_led, led_state);
+    gpiod_set_value(led_desc, led_state);
     pr_info("gpio-led: LED toggled to %s\n", led_state ? "ON" : "OFF");
 }
 EXPORT_SYMBOL(gpio_led_toggle);
@@ -26,28 +24,18 @@ EXPORT_SYMBOL(gpio_led_toggle);
 static int led_probe(struct platform_device *pdev)
 {
     struct device *dev = &pdev->dev;
-    const char *label;
-    int ret;
+    const char *label = "gpio-led";
 
-    gpio_led = of_get_named_gpio(dev->of_node, "gpios", 0);
-    if (!gpio_is_valid(gpio_led)) {
-        dev_err(dev, "Invalid GPIO for LED\n");
-        return -EINVAL;
+    of_property_read_string(dev->of_node, "label", &label);
+
+    led_desc = devm_gpiod_get(dev, NULL, GPIOD_OUT_LOW);
+    if (IS_ERR(led_desc)) {
+        dev_err(dev, "Failed to get LED GPIO descriptor\n");
+        return PTR_ERR(led_desc);
     }
 
-    if (of_property_read_string(dev->of_node, "label", &label))
-        label = "gpio-led";
-
-    ret = devm_gpio_request_one(dev, gpio_led, GPIOF_OUT_INIT_LOW, label);
-    if (ret) {
-        dev_err(dev, "Failed to request LED GPIO\n");
-        return ret;
-    }
-
-    pr_info("gpio-led: initialized on GPIO %d\n", gpio_led);
-
-    gpio_set_value(gpio_led,1);
-
+    pr_info("gpio-led: initialized\n");
+    gpiod_set_value(led_desc, 1);  // Turn LED on initially
     return 0;
 }
 
@@ -75,4 +63,4 @@ module_platform_driver(led_driver);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Wings Mon");
-MODULE_DESCRIPTION("LED driver using GPIO from device tree");
+MODULE_DESCRIPTION("Modern GPIO LED driver using descriptor API");
