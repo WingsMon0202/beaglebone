@@ -1,46 +1,74 @@
-#include <linux/module.h>
-#include <linux/fs.h>
-#include <linux/uaccess.h>
-#include <linux/cdev.h>
-#include <linux/device.h>
-#include <linux/poll.h>
-#include <linux/mutex.h>
-#include <linux/ioctl.h>
+#include <linux/module.h>       // Core header for kernel modules
+#include <linux/fs.h>           // File operations: open, read, write, etc.
+#include <linux/uaccess.h>      // Functions for user access: copy_to_user, etc.
+#include <linux/cdev.h>         // Character device structures
+#include <linux/device.h>       // Device creation: class, device_create
+#include <linux/poll.h>         // Support for poll/select system calls
+#include <linux/mutex.h>        // Kernel mutex support
+#include <linux/ioctl.h>        // IOCTL macros and definitions
 
 #define DEVICE_NAME "gpio_ctrl"
 #define CLASS_NAME  "gpio_class"
 
 #define GPIO_CTRL_MAGIC   'G'
-#define GPIO_GET_STATUS   _IOR(GPIO_CTRL_MAGIC, 0, int)
-#define GPIO_TOGGLE_LED   _IO(GPIO_CTRL_MAGIC, 1)
+#define GPIO_GET_STATUS   _IOR(GPIO_CTRL_MAGIC, 0, int)  // Read LED & Button status
+#define GPIO_TOGGLE_LED   _IO(GPIO_CTRL_MAGIC, 1)        // Toggle LED command
 
 static dev_t dev_num;
 static struct cdev gpio_cdev;
 static struct class *gpio_class = NULL;
 static struct device *gpio_device;
 
-static DEFINE_MUTEX(gpio_mutex);
-static DECLARE_WAIT_QUEUE_HEAD(wq);
-static bool data_ready = false;
+static DEFINE_MUTEX(gpio_mutex);              // Mutex for synchronization
+static DECLARE_WAIT_QUEUE_HEAD(wq);           // Wait queue for poll
+static bool data_ready = false;               // Flag for poll readiness
 
+// External GPIO functions implemented in separate modules
 extern void gpio_led_toggle(void);
 extern int get_led_status(void);
 extern int get_button_status(void);
 
-// ----------- File operations -----------
-
+/**
+ * gpio_ctrl_open - Open the GPIO control device
+ * @inode: Pointer to inode structure
+ * @file: Pointer to file structure
+ *
+ * Called when the device is opened from user space.
+ *
+ * Return: 0 on success.
+ */
 static int gpio_ctrl_open(struct inode *inode, struct file *file)
 {
     pr_info("gpio_ctrl: Device opened\n");
     return 0;
 }
 
+/**
+ * gpio_ctrl_release - Close the GPIO control device
+ * @inode: Pointer to inode structure
+ * @file: Pointer to file structure
+ *
+ * Called when the device is closed from user space.
+ *
+ * Return: 0 on success.
+ */
 static int gpio_ctrl_release(struct inode *inode, struct file *file)
 {
     pr_info("gpio_ctrl: Device closed\n");
     return 0;
 }
 
+/**
+ * gpio_ctrl_write - Write command to device (e.g., "toggle")
+ * @file: File pointer
+ * @buf: User-space buffer
+ * @count: Number of bytes written
+ * @ppos: File position pointer
+ *
+ * Parses user command. If it is "toggle", toggles the LED and signals poll.
+ *
+ * Return: Number of bytes written on success, or -EFAULT/-EINVAL on error.
+ */
 static ssize_t gpio_ctrl_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
 {
     char cmd[16] = {0};
@@ -61,6 +89,17 @@ static ssize_t gpio_ctrl_write(struct file *file, const char __user *buf, size_t
     return -EINVAL;
 }
 
+/**
+ * gpio_ctrl_read - Read LED and button status as a formatted string
+ * @file: File pointer
+ * @buf: User-space buffer
+ * @count: Number of bytes to read
+ * @ppos: File position pointer
+ *
+ * Returns: "LED: ON | Button: PRESSED" or similar text.
+ *
+ * Return: Number of bytes read or -EFAULT if copy_to_user fails.
+ */
 static ssize_t gpio_ctrl_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 {
     char status[64];
@@ -83,6 +122,18 @@ static ssize_t gpio_ctrl_read(struct file *file, char __user *buf, size_t count,
     return len;
 }
 
+/**
+ * gpio_ctrl_ioctl - Handle IOCTL commands from user space
+ * @file: File pointer
+ * @cmd: IOCTL command
+ * @arg: Argument from user space
+ *
+ * Supported commands:
+ * - GPIO_GET_STATUS: Return combined LED + Button status (bit 1 = LED, bit 0 = button)
+ * - GPIO_TOGGLE_LED: Toggle the LED state
+ *
+ * Return: 0 on success, -EFAULT or -EINVAL on error.
+ */
 static long gpio_ctrl_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
     switch (cmd) {
@@ -104,6 +155,15 @@ static long gpio_ctrl_ioctl(struct file *file, unsigned int cmd, unsigned long a
     }
 }
 
+/**
+ * gpio_ctrl_poll - Support for poll/select system calls
+ * @file: File pointer
+ * @wait: Poll table structure
+ *
+ * Allows user-space processes to wait for LED toggle events.
+ *
+ * Return: POLLIN | POLLRDNORM if data is ready, 0 otherwise.
+ */
 static __poll_t gpio_ctrl_poll(struct file *file, struct poll_table_struct *wait)
 {
     poll_wait(file, &wq, wait);
@@ -114,8 +174,7 @@ static __poll_t gpio_ctrl_poll(struct file *file, struct poll_table_struct *wait
     return 0;
 }
 
-// ----------- File operation structure -----------
-
+// File operations structure mapping system calls to handlers
 static const struct file_operations gpio_fops = {
     .owner          = THIS_MODULE,
     .open           = gpio_ctrl_open,
@@ -126,8 +185,14 @@ static const struct file_operations gpio_fops = {
     .poll           = gpio_ctrl_poll,
 };
 
-// ----------- Init / Exit -----------
-
+/**
+ * gpio_ctrl_init - Module initialization function
+ *
+ * Allocates a character device number, initializes and registers
+ * the char device, creates sysfs class and device file.
+ *
+ * Return: 0 on success, or negative error code on failure.
+ */
 static int __init gpio_ctrl_init(void)
 {
     int ret;
@@ -173,6 +238,12 @@ static int __init gpio_ctrl_init(void)
     return 0;
 }
 
+/**
+ * gpio_ctrl_exit - Module exit function
+ *
+ * Cleans up the character device, class, and device file.
+ * Releases allocated resources and logs the unload event.
+ */
 static void __exit gpio_ctrl_exit(void)
 {
     device_destroy(gpio_class, dev_num);
